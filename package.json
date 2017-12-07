@@ -1,0 +1,35 @@
+{
+  "name": "libmemcached",
+  "version": "0.0.1",
+  "description": "Prebuilt bindings for node.js to libmemcached",
+  "main": "index.js",
+  "gypfile": true,
+  "scripts": {
+    "build": "node scripts/preinstall.js",
+    "install": "node scripts/prebuild-install.js || (node scripts/preinstall.js && node-gyp rebuild)",
+    "prebuild": "prebuild --all --strip",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomi77/node-libmemcached.git"
+  },
+  "keywords": [
+    "libmemcached",
+    "memcached",
+    "memcache"
+  ],
+  "author": "Tomasz Jakub Rup <tomasz.rup@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomi77/node-libmemcached/issues"
+  },
+  "homepage": "https://github.com/tomi77/node-libmemcached",
+  "dependencies": {
+    "nan": "^2.8.0",
+    "prebuild-install": "^2.3.0"
+  },
+  "devDependencies": {
+    "prebuild": "^6.2.2"
+  }
+}
