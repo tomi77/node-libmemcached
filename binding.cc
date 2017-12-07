@@ -1,5 +1,5 @@
 #include <assert.h>
-#include <libmemcached-1.0/memcached.h>
+#include <libmemcached/memcached.h>
 #include <node.h>
 #include "nan.h"
 
