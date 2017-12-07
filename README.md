@@ -6,7 +6,7 @@
 * [Installation](#installation)
 * [Usage](#usage)
 * [API](#api)
-  * [`get(key : String) : Buffer`](#getkey__string__buffer)
+  * [`get(key : String) : Buffer`](#getkey--string--buffer)
 
 ## Requirements
 
