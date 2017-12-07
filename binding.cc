@@ -8,20 +8,20 @@ using namespace node;
 
 namespace memcache {
 
-class Memcache : public Nan::ObjectWrap {
+class MemcachedClient : public Nan::ObjectWrap {
 public:
     static NAN_MODULE_INIT(Initialize);
 private:
     static NAN_METHOD(New);
     static NAN_METHOD(Get);
 
-    Memcache(const std::string &config);
-    static Memcache *GetMemcache(const Nan::FunctionCallbackInfo<Value>&);
+    MemcachedClient(const std::string &config);
+    static MemcachedClient *GetInstance(const Nan::FunctionCallbackInfo<Value>&);
 
-    memcached_st *memc_;
+    memcached_st *mcc;
 };
 
-NAN_MODULE_INIT(Memcache::Initialize) {
+NAN_MODULE_INIT(MemcachedClient::Initialize) {
     Nan::HandleScope scope;
 
     Local<FunctionTemplate> t = Nan::New<FunctionTemplate>(New);
@@ -29,10 +29,10 @@ NAN_MODULE_INIT(Memcache::Initialize) {
 
     Nan::SetPrototypeMethod(t, "get", Get);
 
-    Nan::Set(target, Nan::New("Memcache").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
+    Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
 }
 
-NAN_METHOD(Memcache::New) {
+NAN_METHOD(MemcachedClient::New) {
     assert(info.IsConstructCall());
 
     if (info.Length() != 1) {
@@ -41,15 +41,15 @@ NAN_METHOD(Memcache::New) {
 
     Nan::Utf8String config(info[0]);
 
-    Memcache *memcache = new Memcache(*config);
-    memcache->Wrap(info.This());
+    MemcachedClient *mcc = new MemcachedClient(*config);
+    mcc->Wrap(info.This());
     info.GetReturnValue().Set(info.This());
 }
 
-NAN_METHOD(Memcache::Get) {
-    Memcache *memc = GetMemcache(info);
+NAN_METHOD(MemcachedClient::Get) {
+    MemcachedClient *mcc = GetInstance(info);
 
-    if (memc->memc_ == NULL)
+    if (mcc->mcc == NULL)
         return Nan::ThrowError("memcache not initialized");
     if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
@@ -60,9 +60,9 @@ NAN_METHOD(Memcache::Get) {
     uint32_t flags = 0;
     memcached_return_t rc;
     size_t value_length = 0;
-    v8::Isolate* isolate = info.GetIsolate();
+    // v8::Isolate* isolate = info.GetIsolate();
 
-    char *value= memcached_get(memc->memc_, key.c_str(), key.length(),
+    char *value= memcached_get(mcc->mcc, key.c_str(), key.length(),
                                &value_length, &flags, &rc);
     if (value != NULL && ret_val.empty())
     {
@@ -76,19 +76,19 @@ NAN_METHOD(Memcache::Get) {
     }
 }
 
-Memcache::Memcache(const std::string &config) : Nan::ObjectWrap() {
-    memc_ = memcached(config.c_str(), config.size());
+MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
+    mcc = memcached(config.c_str(), config.size());
 }
 
-Memcache *
-Memcache::GetMemcache(const Nan::FunctionCallbackInfo<Value>& info) {
-    return Nan::ObjectWrap::Unwrap<Memcache>(info.This());
+MemcachedClient *
+MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<Value>& info) {
+    return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
 }
 
 static NAN_MODULE_INIT(Initialize) {
     Nan::HandleScope scope;
 
-    Memcache::Initialize(target);
+    MemcachedClient::Initialize(target);
 }
 
 }  // namespace memcache

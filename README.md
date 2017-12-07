@@ -10,7 +10,9 @@
 
 ## Requirements
 
-`libmemcached` and `libmemcached-dev`
+* `libmemcached`
+* `libmemcached-dev`
+* `gcc`
 
 ## Installation
 
@@ -27,11 +29,11 @@ yarn add libmemcached
 ## Usage
 
 ~~~js
-const memcached = require('libmemcached').Memcache;
+const MemcachedClient = require('libmemcached');
 
-const mc = new Memcache('--SERVER=127.0.0.1');
+const mcc = new MemcachedClient('--SERVER=127.0.0.1');
 
-console.log(mc.get('test'));
+console.log(mcc.get('test'));
 ~~~
 
 ## API

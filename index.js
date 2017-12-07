@@ -1,3 +1,1 @@
-const memcached = require('./build/Release/memcached.node');
-
-module.exports = memcached
+module.exports = require('./build/Release/memcached.node').MemcachedClient;
