@@ -5,6 +5,8 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
+* [API](#api)
+  * [`get(key : String) : Buffer`](#getkey__string__buffer)
 
 ## Requirements
 
@@ -31,3 +33,7 @@ const mc = new Memcache('--SERVER=127.0.0.1');
 
 console.log(mc.get('test'));
 ~~~
+
+## API
+
+### `get(key : String) : Buffer`
