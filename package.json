@@ -1,7 +1,7 @@
 {
   "name": "libmemcached",
   "version": "0.0.1",
-  "description": "Prebuilt bindings for node.js to libmemcached",
+  "description": "Node.js bindings to the libmemcached library",
   "main": "index.js",
   "gypfile": true,
   "scripts": {

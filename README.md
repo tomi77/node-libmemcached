@@ -1,5 +1,7 @@
 # libmemcached
 
+Node.js bindings to the libmemcached library.
+
 ## Table of contents
 
 * [Requirements](#requirements)
