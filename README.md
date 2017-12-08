@@ -1,5 +1,7 @@
 # libmemcached
 
+[![Build Status](https://travis-ci.org/tomi77/node-libmemcached.svg?branch=master)](https://travis-ci.org/tomi77/node-libmemcached)
+
 Node.js bindings to the libmemcached library.
 
 ## Table of contents
