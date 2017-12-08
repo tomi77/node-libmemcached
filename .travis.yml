@@ -1,0 +1,10 @@
+language: node_js
+
+node_js: node
+
+services:
+  - memcached
+
+before_install:
+  - sudo apt-get install netcat-traditional
+  - printf "2\n"| sudo update-alternatives --config nc
