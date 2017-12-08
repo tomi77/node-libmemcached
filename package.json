@@ -5,7 +5,9 @@
   "main": "index.js",
   "gypfile": true,
   "scripts": {
-    "install": "node-gyp rebuild"
+    "install": "node-gyp rebuild",
+    "pretest": "echo \"set test 0 0 4 \r\ntest\r\nquit\"| nc 127.0.0.1 11211",
+    "test": "mocha --recursive --exit test/*"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,9 @@
   "homepage": "https://github.com/tomi77/node-libmemcached",
   "dependencies": {
     "nan": "^2.8.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
   }
 }

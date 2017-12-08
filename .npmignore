@@ -39,7 +39,5 @@ jspm_packages
 .node_repl_history
 
 test
-src
 .*
 codeclimate.yml
-coffeelint.json
