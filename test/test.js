@@ -3,7 +3,7 @@ const assert = require('chai').assert
 
 const mcc = new MemcachedClient('--SERVER=127.0.0.1')
 
-describe('MemcachedClient has function', () => {
+describe('MemcachedClient', () => {
   describe('#get', () => {
     it('should return Buffer object', () => {
       assert.instanceOf(mcc.get('test'), Buffer)
