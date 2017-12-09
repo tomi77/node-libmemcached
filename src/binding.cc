@@ -4,6 +4,7 @@
 #include "nan.h"
 #include "client.hpp"
 #include "get.hpp"
+#include "exist.hpp"
 
 using namespace v8;
 using namespace node;
@@ -17,6 +18,7 @@ NAN_MODULE_INIT(MemcachedClient::Initialize) {
     t->InstanceTemplate()->SetInternalFieldCount(1);
 
     Nan::SetPrototypeMethod(t, "get", Get);
+    Nan::SetPrototypeMethod(t, "exist", Exist);
 
     Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
 }

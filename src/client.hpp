@@ -16,6 +16,7 @@ public:
 private:
     static NAN_METHOD(New);
     static NAN_METHOD(Get);
+    static NAN_METHOD(Exist);
 
     MemcachedClient(const std::string &config);
     static MemcachedClient *GetInstance(const Nan::FunctionCallbackInfo<Value>&);

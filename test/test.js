@@ -12,4 +12,13 @@ describe('MemcachedClient', () => {
       assert.equal(mcc.get('test').compare(Buffer.from('test')), 0)
     })
   })
+
+  describe('#exist', () => {
+    it('should return true if key exist', () => {
+      assert.isTrue(mcc.exist('test'))
+    })
+    it('should return false if key not exist', () => {
+      assert.isFalse(mcc.exist('not test'))
+    })
+  })
 })
