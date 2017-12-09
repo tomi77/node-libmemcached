@@ -21,6 +21,15 @@ private:
     memcached_st *mcc;
 };
 
+MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
+    mcc = memcached(config.c_str(), config.size());
+}
+
+MemcachedClient *
+MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<Value>& info) {
+    return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
+}
+
 NAN_MODULE_INIT(MemcachedClient::Initialize) {
     Nan::HandleScope scope;
 
@@ -62,8 +71,8 @@ NAN_METHOD(MemcachedClient::Get) {
     size_t value_length = 0;
     // v8::Isolate* isolate = info.GetIsolate();
 
-    char *value= memcached_get(mcc->mcc, key.c_str(), key.length(),
-                               &value_length, &flags, &rc);
+    char *value = memcached_get(mcc->mcc, key.c_str(), key.length(),
+                                &value_length, &flags, &rc);
     if (value != NULL && ret_val.empty())
     {
         ret_val.reserve(value_length + 1); // Always provide null
@@ -74,15 +83,6 @@ NAN_METHOD(MemcachedClient::Get) {
         // info.GetReturnValue().Set(String::NewFromUtf8(isolate, ret_str.c_str()));
         info.GetReturnValue().Set(Nan::CopyBuffer(ret_str.c_str(), ret_str.length()).ToLocalChecked());
     }
-}
-
-MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
-    mcc = memcached(config.c_str(), config.size());
-}
-
-MemcachedClient *
-MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<Value>& info) {
-    return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
 }
 
 static NAN_MODULE_INIT(Initialize) {
