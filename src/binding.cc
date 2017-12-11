@@ -1,10 +1,6 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
-#include "get.hpp"
-#include "exist.hpp"
-#include "touch.hpp"
-#include "delete.hpp"
 
 namespace memcache {
 
@@ -34,6 +30,16 @@ NAN_METHOD(MemcachedClient::New) {
     MemcachedClient *mcc = new MemcachedClient(*config);
     mcc->Wrap(info.This());
     info.GetReturnValue().Set(info.This());
+}
+
+MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
+    mcc = memcached(config.c_str(), config.size());
+    memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_USE_UDP, 0);
+}
+
+MemcachedClient *
+MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+    return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
 }
 
 static NAN_MODULE_INIT(Initialize) {

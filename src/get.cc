@@ -2,8 +2,6 @@
 #include "nan.h"
 #include "client.hpp"
 
-#pragma once
-
 namespace memcache {
 
 NAN_METHOD(MemcachedClient::Get) {

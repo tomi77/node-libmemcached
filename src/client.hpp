@@ -1,4 +1,3 @@
-#include <libmemcached/memcached.h>
 #include "nan.h"
 
 #pragma once
@@ -20,15 +19,5 @@ private:
 
     memcached_st *mcc;
 };
-
-MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
-    mcc = memcached(config.c_str(), config.size());
-    memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_USE_UDP, 0);
-}
-
-MemcachedClient *
-MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<v8::Value>& info) {
-    return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
-}
 
 }  // namespace memcache
