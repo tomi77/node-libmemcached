@@ -8,15 +8,12 @@
 #include "touch.hpp"
 #include "delete.hpp"
 
-using namespace v8;
-using namespace node;
-
 namespace memcache {
 
 NAN_MODULE_INIT(MemcachedClient::Initialize) {
     Nan::HandleScope scope;
 
-    Local<FunctionTemplate> t = Nan::New<FunctionTemplate>(New);
+    v8::Local<v8::FunctionTemplate> t = Nan::New<v8::FunctionTemplate>(New);
     t->InstanceTemplate()->SetInternalFieldCount(1);
 
     Nan::SetPrototypeMethod(t, "get", Get);

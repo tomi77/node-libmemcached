@@ -5,9 +5,6 @@
 
 #pragma once
 
-using namespace v8;
-using namespace node;
-
 namespace memcache {
 
 class MemcachedClient : public Nan::ObjectWrap {
@@ -21,7 +18,7 @@ private:
     static NAN_METHOD(Delete);
 
     MemcachedClient(const std::string &config);
-    static MemcachedClient *GetInstance(const Nan::FunctionCallbackInfo<Value>&);
+    static MemcachedClient *GetInstance(const Nan::FunctionCallbackInfo<v8::Value>&);
 
     memcached_st *mcc;
 };
@@ -32,7 +29,7 @@ MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() 
 }
 
 MemcachedClient *
-MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<Value>& info) {
+MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
 }
 

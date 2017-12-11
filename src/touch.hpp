@@ -5,9 +5,6 @@
 
 #pragma once
 
-using namespace v8;
-using namespace node;
-
 namespace memcache {
 
 NAN_METHOD(MemcachedClient::Touch) {
