@@ -46,4 +46,11 @@ describe('MemcachedClient', () => {
       assert.isUndefined(mcc.touch('test', 1000))
     })
   })
+
+  describe('#remove', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.remove()
+      assert.throws(fn)
+    })
+  })
 })
