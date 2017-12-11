@@ -23,6 +23,8 @@ NAN_METHOD(MemcachedClient::Delete) {
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
     }
+
+    info.GetReturnValue().Set(info.This());
 }
 
 }  // namespace memcache

@@ -42,8 +42,8 @@ describe('MemcachedClient', () => {
       fn = () => mcc.touch('test', 10000)
       assert.doesNotThrow(fn)
     })
-    it('should return "undefined"', () => {
-      assert.isUndefined(mcc.touch('test', 1000))
+    it('should return reference to MemcachedClient object', () => {
+      assert.equal(mcc.touch('test', 1000), mcc)
     })
   })
 
@@ -51,6 +51,9 @@ describe('MemcachedClient', () => {
     it('should throws error, when key is not provided', () => {
       fn = () => mcc.delete()
       assert.throws(fn)
+    })
+    it('should return reference to MemcachedClient object', () => {
+      assert.equal(mcc.delete('test'), mcc)
     })
   })
 })

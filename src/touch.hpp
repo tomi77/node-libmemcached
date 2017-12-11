@@ -29,6 +29,8 @@ NAN_METHOD(MemcachedClient::Touch) {
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
     }
+
+    info.GetReturnValue().Set(info.This());
 }
 
 }  // namespace memcache
