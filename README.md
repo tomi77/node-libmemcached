@@ -12,7 +12,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [API](#api)
   * [`get(key : String) : Buffer`](#getkey--string--buffer)
   * [`exist(key : String) : Boolean`](#existkey--string--boolean)
-  * [`touch(key : String, expiration : Number) : this`](#touchkey--string-expiration--number--this)
+  * [`touch(key : String, expiration : Integer) : this`](#touchkey--string-expiration--integer--this)
   * [`delete(key : String) : this`](#deletekey--string--this)
 
 ## Requirements
@@ -53,7 +53,7 @@ Get item.
 
 Determine if a item exists.
 
-### `touch(key : String, expiration : Number) : this`
+### `touch(key : String, expiration : Integer) : this`
 
 Update the expiration time of an existing item without fetching it.
 
