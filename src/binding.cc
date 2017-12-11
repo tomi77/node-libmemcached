@@ -5,6 +5,7 @@
 #include "client.hpp"
 #include "get.hpp"
 #include "exist.hpp"
+#include "touch.hpp"
 
 using namespace v8;
 using namespace node;
@@ -19,6 +20,7 @@ NAN_MODULE_INIT(MemcachedClient::Initialize) {
 
     Nan::SetPrototypeMethod(t, "get", Get);
     Nan::SetPrototypeMethod(t, "exist", Exist);
+    Nan::SetPrototypeMethod(t, "touch", Touch);
 
     Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
 }

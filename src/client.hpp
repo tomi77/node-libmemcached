@@ -17,6 +17,7 @@ private:
     static NAN_METHOD(New);
     static NAN_METHOD(Get);
     static NAN_METHOD(Exist);
+    static NAN_METHOD(Touch);
 
     MemcachedClient(const std::string &config);
     static MemcachedClient *GetInstance(const Nan::FunctionCallbackInfo<Value>&);
@@ -27,7 +28,6 @@ private:
 MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
     mcc = memcached(config.c_str(), config.size());
     memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_USE_UDP, 0);
-    memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_NO_BLOCK, 0);
 }
 
 MemcachedClient *

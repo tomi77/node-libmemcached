@@ -29,4 +29,18 @@ describe('MemcachedClient', () => {
       assert.isFalse(mcc.exist('not_existent_key'))
     })
   })
+
+  describe('#touch', () => {
+    it('should throw a exception when key not exist', () => {
+      fn = () => mcc.touch('not_existent_key', 1000)
+      assert.throws(fn)
+    })
+    it('shouldn\'t throw a exception when key exist', () => {
+      fn = () => mcc.touch('test', 10000)
+      assert.doesNotThrow(fn)
+    })
+    it('should return nothing', () => {
+      assert.isUndefined(mcc.touch('test', 1000))
+    })
+  })
 })
