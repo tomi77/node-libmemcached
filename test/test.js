@@ -5,6 +5,10 @@ const mcc = new MemcachedClient('--SERVER=127.0.0.1')
 
 describe('MemcachedClient', () => {
   describe('#get', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.get()
+      assert.throws(fn)
+    })
     it('should return Buffer object', () => {
       assert.instanceOf(mcc.get('test'), Buffer)
     })
