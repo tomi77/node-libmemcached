@@ -22,7 +22,7 @@ NAN_MODULE_INIT(MemcachedClient::Initialize) {
     Nan::SetPrototypeMethod(t, "get", Get);
     Nan::SetPrototypeMethod(t, "exist", Exist);
     Nan::SetPrototypeMethod(t, "touch", Touch);
-    Nan::SetPrototypeMethod(t, "remove", Delete);
+    Nan::SetPrototypeMethod(t, "delete", Delete);
 
     Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
 }

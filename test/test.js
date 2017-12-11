@@ -47,9 +47,9 @@ describe('MemcachedClient', () => {
     })
   })
 
-  describe('#remove', () => {
+  describe('#delete', () => {
     it('should throws error, when key is not provided', () => {
-      fn = () => mcc.remove()
+      fn = () => mcc.delete()
       assert.throws(fn)
     })
   })
