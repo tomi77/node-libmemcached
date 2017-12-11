@@ -53,7 +53,11 @@ describe('MemcachedClient', () => {
       assert.throws(fn)
     })
     it('should return reference to MemcachedClient object', () => {
-      assert.equal(mcc.delete('test'), mcc)
+      assert.equal(mcc.delete('to_del'), mcc)
+    })
+    it('should delete item', () => {
+      mcc.delete('to_del2')
+      assert.isUndefined(mcc.get('to_del2'))
     })
   })
 })

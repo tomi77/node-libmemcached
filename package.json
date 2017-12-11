@@ -6,7 +6,7 @@
   "gypfile": true,
   "scripts": {
     "install": "node-gyp rebuild",
-    "pretest": "echo \"set test 0 0 4 \r\ntest\r\nquit\"| nc 127.0.0.1 11211",
+    "pretest": "echo \"set test 0 0 4 \r\ntest\r\nset to_del 0 0 4 \r\ntest\r\nset to_del2 0 0 4 \r\ntest\r\nquit\"| nc 127.0.0.1 11211",
     "test": "mocha --recursive --exit test/*"
   },
   "repository": {
