@@ -10,10 +10,10 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [Installation](#installation)
 * [Usage](#usage)
 * [API](#api)
-  * [`get(key : String) : Buffer`](#getkey--string--buffer)
-  * [`exist(key : String) : Boolean`](#existkey--string--boolean)
-  * [`touch(key : String, expiration : Integer) : this`](#touchkey--string-expiration--integer--this)
-  * [`delete(key : String) : this`](#deletekey--string--this)
+  * [get(key : String) : Buffer](#getkey--string--buffer)
+  * [exist(key : String) : Boolean](#existkey--string--boolean)
+  * [touch(key : String, expiration : Integer) : this](#touchkey--string-expiration--integer--this)
+  * [delete(key : String) : this](#deletekey--string--this)
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 ## Installation
 
 ~~~sh
-npm i libmemcached
+npm install libmemcached --save
 ~~~
 
 or
@@ -45,18 +45,18 @@ console.log(mcc.get('test'));
 
 ## API
 
-### `get(key : String) : Buffer`
+### get(key : String) : Buffer
 
 Get item.
 
-### `exist(key : String) : Boolean`
+### exist(key : String) : Boolean
 
 Determine if a item exists.
 
-### `touch(key : String, expiration : Integer) : this`
+### touch(key : String, expiration : Integer) : this
 
 Update the expiration time of an existing item without fetching it.
 
-### `delete(key : String) : this`
+### delete(key : String) : this
 
 Remove a item.
