@@ -15,6 +15,9 @@ describe('MemcachedClient', () => {
     it('should return stored value', () => {
       assert.equal(mcc.get('test').compare(Buffer.from('test')), 0)
     })
+    it('should return "undefined" when key doesn\'t exist', () => {
+      assert.isUndefined(mcc.get('not_existent_key'))
+    })
   })
 
   describe('#exist', () => {
@@ -39,7 +42,7 @@ describe('MemcachedClient', () => {
       fn = () => mcc.touch('test', 10000)
       assert.doesNotThrow(fn)
     })
-    it('should return nothing', () => {
+    it('should return "undefined"', () => {
       assert.isUndefined(mcc.touch('test', 1000))
     })
   })
