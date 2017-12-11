@@ -26,9 +26,13 @@ NAN_METHOD(MemcachedClient::Exist) {
     {
         info.GetReturnValue().Set(Nan::True());
     }
-    else
+    else if (rc == MEMCACHED_NOTFOUND)
     {
         info.GetReturnValue().Set(Nan::False());
+    }
+    else
+    {
+        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
     }
 }
 

@@ -14,11 +14,15 @@ describe('MemcachedClient', () => {
   })
 
   describe('#exist', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.exist()
+      assert.throws(fn)
+    })
     it('should return true if key exist', () => {
       assert.isTrue(mcc.exist('test'))
     })
     it('should return false if key not exist', () => {
-      assert.isFalse(mcc.exist('not test'))
+      assert.isFalse(mcc.exist('not_existent_key'))
     })
   })
 })
