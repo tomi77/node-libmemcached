@@ -12,6 +12,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [API](#api)
   * [`get(key : String) : Buffer`](#getkey--string--buffer)
   * [`exist(key : String) : Boolean`](#existkey--string--boolean)
+  * [`touch(key : String, expiration : Number)`](#touchkey--string-expiration--number)
 
 ## Requirements
 
@@ -45,8 +46,12 @@ console.log(mcc.get('test'));
 
 ### `get(key : String) : Buffer`
 
-Fetch an individual value from the server.
+Get item.
 
 ### `exist(key : String) : Boolean`
 
-Determine if a keys exists.
+Determine if a item exists.
+
+### `touch(key : String, expiration : Number)`
+
+Update the expiration time of an existing item without fetching it.
