@@ -1,5 +1,4 @@
 #include <libmemcached/memcached.h>
-#include <node.h>
 #include "nan.h"
 #include "client.hpp"
 

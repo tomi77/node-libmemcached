@@ -1,6 +1,4 @@
-#include <assert.h>
 #include <libmemcached/memcached.h>
-#include <node.h>
 #include "nan.h"
 
 #pragma once

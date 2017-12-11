@@ -1,5 +1,4 @@
 #include <libmemcached/memcached.h>
-#include <node.h>
 #include "nan.h"
 #include "client.hpp"
 
@@ -12,7 +11,7 @@ NAN_METHOD(MemcachedClient::Delete) {
 
     if (mcc->mcc == NULL)
         return Nan::ThrowError("memcache not initialized");
-    if (info.Length() < 1)
+    if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
 
     Nan::Utf8String nan_key(info[0]);
