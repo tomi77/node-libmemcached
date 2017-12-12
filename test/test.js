@@ -86,12 +86,14 @@ describe('MemcachedClient', () => {
       fn = () => mcc.increment('str')
       assert.throws(fn)
     })
-    it('should increment by 1 by default', () => {
-      assert.equal(mcc.increment('test'), 2)
-    })
-    it('should increment by provided value', () => {
-      assert.equal(mcc.increment('test', 2), 4)
-    })
+    if (process.env.DISABLE_INC_DEC_TEST == null) {
+      it('should increment by 1 by default', () => {
+        assert.equal(mcc.increment('test'), 2)
+      })
+      it('should increment by provided value', () => {
+        assert.equal(mcc.increment('test', 2), 4)
+      })
+    }
   })
 
   describe('#decrement', () => {
@@ -115,11 +117,13 @@ describe('MemcachedClient', () => {
       fn = () => mcc.decrement('str')
       assert.throws(fn)
     })
-    it('should decrement by 1 by default', () => {
-      assert.equal(mcc.decrement('test'), 3)
-    })
-    it('should decrement by provided value', () => {
-      assert.equal(mcc.decrement('test', 2), 1)
-    })
+    if (process.env.DISABLE_INC_DEC_TEST == null) {
+      it('should decrement by 1 by default', () => {
+        assert.equal(mcc.decrement('test'), 3)
+      })
+      it('should decrement by provided value', () => {
+        assert.equal(mcc.decrement('test', 2), 1)
+      })
+    }
   })
 })
