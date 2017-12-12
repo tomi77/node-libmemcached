@@ -65,4 +65,8 @@ Remove a item.
 
 ### increment(key : String [, offset : Integer = 1]) : Integer
 
+Incrementing item.
+
 ### decrement(key : String [, offset : Integer = 1]) : Integer
+
+Decrementing item.
