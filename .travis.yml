@@ -6,6 +6,6 @@ services:
   - memcached
 
 before_install:
-  - memcached -V
+  - memcached --version
   - sudo apt-get install netcat-traditional
   - printf "2\n"| sudo update-alternatives --config nc
