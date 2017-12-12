@@ -37,7 +37,6 @@ NAN_METHOD(MemcachedClient::New) {
 MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
     mcc = memcached(config.c_str(), config.size());
     memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_USE_UDP, 0);
-    memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_BINARY_PROTOCOL, 1);
 }
 
 MemcachedClient *
