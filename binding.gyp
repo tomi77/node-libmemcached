@@ -3,6 +3,7 @@
     {
       'target_name': 'memcached',
       'sources': [
+        'src/auto.cc',
         'src/binding.cc',
         'src/delete.cc',
         'src/exist.cc',

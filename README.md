@@ -14,6 +14,8 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
   * [exist(key : String) : Boolean](#existkey--string--boolean)
   * [touch(key : String, expiration : Integer) : this](#touchkey--string-expiration--integer--this)
   * [delete(key : String) : this](#deletekey--string--this)
+  * [increment(key : String [, offset : Integer = 1]) : Integer](#incrementkey--string--offset--integer--1--integer)
+  * [decrement(key : String [, offset : Integer = 1]) : Integer](#decrementkey--string--offset--integer--1--integer)
 
 ## Requirements
 
@@ -60,3 +62,7 @@ Update the expiration time of an existing item without fetching it.
 ### delete(key : String) : this
 
 Remove a item.
+
+### increment(key : String [, offset : Integer = 1]) : Integer
+
+### decrement(key : String [, offset : Integer = 1]) : Integer
