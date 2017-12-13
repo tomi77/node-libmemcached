@@ -12,15 +12,14 @@ NAN_METHOD(MemcachedClient::Get) {
     if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
 
-    Nan::Utf8String nan_key(info[0]);
-    std::string key(*nan_key);
+    Nan::Utf8String key(info[0]);
     std::vector<char> ret_val;
     uint32_t flags = 0;
     memcached_return_t rc;
     size_t value_length = 0;
     // v8::Isolate* isolate = info.GetIsolate();
 
-    char *value = memcached_get(mcc->mcc, key.c_str(), key.length(),
+    char *value = memcached_get(mcc->mcc, *key, key.length(),
                                 &value_length, &flags, &rc);
     if (value != NULL && ret_val.empty())
     {

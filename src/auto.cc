@@ -16,14 +16,13 @@ NAN_METHOD(MemcachedClient::Increment) {
     if (info.Length() >= 3 && !info[2]->IsInt32())
         return Nan::ThrowError("Start must be a integer");
 
-    Nan::Utf8String nan_key(info[0]);
-    std::string key(*nan_key);
+    Nan::Utf8String key(info[0]);
     uint32_t offset = 1;
     if (info.Length() >= 2)
         offset = info[1]->IntegerValue();
     uint64_t value;
 
-    memcached_return_t rc = memcached_increment(mcc->mcc, key.c_str(), key.length(), offset, &value);
+    memcached_return_t rc = memcached_increment(mcc->mcc, *key, key.length(), offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
@@ -45,14 +44,13 @@ NAN_METHOD(MemcachedClient::Decrement) {
     if (info.Length() >= 3 && !info[2]->IsInt32())
         return Nan::ThrowError("Start must be a integer");
 
-    Nan::Utf8String nan_key(info[0]);
-    std::string key(*nan_key);
+    Nan::Utf8String key(info[0]);
     uint32_t offset = 1;
     if (info.Length() >= 2)
         offset = info[1]->IntegerValue();
     uint64_t value;
 
-    memcached_return_t rc = memcached_decrement(mcc->mcc, key.c_str(), key.length(), offset, &value);
+    memcached_return_t rc = memcached_decrement(mcc->mcc, *key, key.length(), offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));

@@ -14,11 +14,10 @@ NAN_METHOD(MemcachedClient::Touch) {
     if (!info[1]->IsInt32())
         return Nan::ThrowError("Expiration time must be a integer");
 
-    Nan::Utf8String nan_key(info[0]);
-    std::string key(*nan_key);
+    Nan::Utf8String key(info[0]);
     time_t expiration = info[1]->IntegerValue();
 
-    memcached_return_t rc = memcached_touch(mcc->mcc, key.c_str(), key.length(), expiration);
+    memcached_return_t rc = memcached_touch(mcc->mcc, *key, key.length(), expiration);
     if (memcached_failed(rc))
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));

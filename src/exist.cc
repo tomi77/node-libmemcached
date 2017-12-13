@@ -12,10 +12,9 @@ NAN_METHOD(MemcachedClient::Exist) {
     if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
 
-    Nan::Utf8String nan_key(info[0]);
-    std::string key(*nan_key);
+    Nan::Utf8String key(info[0]);
 
-    memcached_return_t rc = memcached_exist(mcc->mcc, key.c_str(), key.length());
+    memcached_return_t rc = memcached_exist(mcc->mcc, *key, key.length());
     if (rc == MEMCACHED_SUCCESS)
     {
         info.GetReturnValue().Set(Nan::True());
