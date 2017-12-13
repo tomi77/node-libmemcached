@@ -10,12 +10,12 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [Installation](#installation)
 * [Usage](#usage)
 * [API](#api)
-  * [get(key : String) : Buffer](#getkey--string--buffer)
-  * [exist(key : String) : Boolean](#existkey--string--boolean)
-  * [touch(key : String, expiration : Integer) : this](#touchkey--string-expiration--integer--this)
-  * [delete(key : String) : this](#deletekey--string--this)
-  * [increment(key : String [, offset : Integer = 1]) : Integer](#incrementkey--string--offset--integer--1--integer)
-  * [decrement(key : String [, offset : Integer = 1]) : Integer](#decrementkey--string--offset--integer--1--integer)
+  * [get(key: string): Buffer](#getkey-string-buffer)
+  * [exist(key: string): boolean](#existkey-string-boolean)
+  * [touch(key: string, expiration: integer): this](#touchkey-string-expiration-integer-this)
+  * [delete(key: string): this](#deletekey-string-this)
+  * [increment(key: string, offset?: integer=1): integer](#incrementkey-string-offset-integer1-integer)
+  * [decrement(key: string, offset?: integer=1): integer](#decrementkey-string-offset-integer1-integer)
 
 ## Requirements
 
@@ -47,26 +47,26 @@ console.log(mcc.get('test'));
 
 ## API
 
-### get(key : String) : Buffer
+### get(key: string): Buffer
 
 Get item.
 
-### exist(key : String) : Boolean
+### exist(key: string): boolean
 
 Determine if a item exists.
 
-### touch(key : String, expiration : Integer) : this
+### touch(key: string, expiration: integer): this
 
 Update the expiration time of an existing item without fetching it.
 
-### delete(key : String) : this
+### delete(key: string): this
 
 Remove a item.
 
-### increment(key : String [, offset : Integer = 1]) : Integer
+### increment(key: string, offset?: integer=1): integer
 
 Incrementing item.
 
-### decrement(key : String [, offset : Integer = 1]) : Integer
+### decrement(key: string, offset?: integer=1): integer
 
 Decrementing item.
