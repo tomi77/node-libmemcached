@@ -16,6 +16,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
   * [delete(key: string): this](#deletekey-string-this)
   * [increment(key: string, offset?: integer=1): integer](#incrementkey-string-offset-integer1-integer)
   * [decrement(key: string, offset?: integer=1): integer](#decrementkey-string-offset-integer1-integer)
+  * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
 
 ## Requirements
 
@@ -70,3 +71,7 @@ Incrementing item.
 ### decrement(key: string, offset?: integer=1): integer
 
 Decrementing item.
+
+### set(key: string, value: Buffer|string|number, expiration?:integer=0): this
+
+Store item.

@@ -11,6 +11,7 @@ NAN_MODULE_INIT(MemcachedClient::Initialize) {
     t->InstanceTemplate()->SetInternalFieldCount(1);
 
     Nan::SetPrototypeMethod(t, "get", Get);
+    Nan::SetPrototypeMethod(t, "set", Set);
     Nan::SetPrototypeMethod(t, "exist", Exist);
     Nan::SetPrototypeMethod(t, "touch", Touch);
     Nan::SetPrototypeMethod(t, "delete", Delete);
