@@ -10,13 +10,14 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [Installation](#installation)
 * [Usage](#usage)
 * [API](#api)
+  * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
+  * [add(key: string, value: Buffer|string|number, expiration?:integer=0): this](#addkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [get(key: string): Buffer](#getkey-string-buffer)
   * [exist(key: string): boolean](#existkey-string-boolean)
   * [touch(key: string, expiration: integer): this](#touchkey-string-expiration-integer-this)
   * [delete(key: string): this](#deletekey-string-this)
   * [increment(key: string, offset?: integer=1): integer](#incrementkey-string-offset-integer1-integer)
   * [decrement(key: string, offset?: integer=1): integer](#decrementkey-string-offset-integer1-integer)
-  * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
 
 ## Requirements
 
@@ -48,6 +49,14 @@ console.log(mcc.get('test'));
 
 ## API
 
+### set(key: string, value: Buffer|string|number, expiration?:integer=0): this
+
+Store item.
+
+### add(key: string, value: Buffer|string|number, expiration?:integer=0): this
+
+Add item.
+
 ### get(key: string): Buffer
 
 Get item.
@@ -71,7 +80,3 @@ Incrementing item.
 ### decrement(key: string, offset?: integer=1): integer
 
 Decrementing item.
-
-### set(key: string, value: Buffer|string|number, expiration?:integer=0): this
-
-Store item.
