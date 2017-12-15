@@ -13,6 +13,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
   * [constructor(config: string)](#constructorconfig-string)
   * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [add(key: string, value: Buffer|string|number, expiration?:integer=0): this](#addkey-string-value-bufferstringnumber-expirationinteger0-this)
+  * [replace(key: string, value: Buffer|string|number, expiration?:integer=0): this](#replacekey-string-value-bufferstringnumber-expirationinteger0-this)
   * [get(key: string): Buffer](#getkey-string-buffer)
   * [exist(key: string): boolean](#existkey-string-boolean)
   * [touch(key: string, expiration: integer): this](#touchkey-string-expiration-integer-this)
@@ -63,6 +64,10 @@ Store item.
 ### add(key: string, value: Buffer|string|number, expiration?:integer=0): this
 
 Add item.
+
+### replace(key: string, value: Buffer|string|number, expiration?:integer=0): this
+
+Replace item.
 
 ### get(key: string): Buffer
 

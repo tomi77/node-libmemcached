@@ -239,4 +239,65 @@ describe('MemcachedClient', () => {
       assert.deepEqual(mcc.get('override_key_add'), Buffer.from('val'))
     })
   })
+
+  describe('#replace', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.replace()
+      assert.throws(fn)
+    })
+    it('should throws error, when value is not provided', () => {
+      fn = () => mcc.replace('net_key')
+      assert.throws(fn)
+    })
+    it('should throws error, when value is boolean', () => {
+      fn = () => mcc.replace('bool_key', true)
+      assert.throws(fn)
+    })
+    it('should throws error, when value is null', () => {
+      fn = () => mcc.replace('null_key', null)
+      assert.throws(fn)
+    })
+    it('should throws error, when value is undefined', () => {
+      fn = () => mcc.replace('undef_key', undefined)
+      assert.throws(fn)
+    })
+    it('should throws error, when value is function', () => {
+      fn = () => mcc.replace('func_key', () => {})
+      assert.throws(fn)
+    })
+    it('should throws error, when value is object', () => {
+      fn = () => mcc.replace('obj_key', {'a': 1})
+      assert.throws(fn)
+    })
+    it('should throws error, when value is Array', () => {
+      fn = () => mcc.replace('arr_key', [1, 2, 3])
+      assert.throws(fn)
+    })
+    it('should return reference to MemcachedClient object', () => {
+      assert.equal(mcc.replace('ref_test_replace', 'ref'), mcc)
+    })
+    it('should doesn\'t store value, when key doesn\'t exist', () => {
+      assert.isUndefined(mcc.replace('ref_new_replace', 'ref').get('ref_new_replace'))
+    })
+    it('should store Buffer value', () => {
+      mcc.add('buf_key_replace', Buffer.from('val'))
+      mcc.replace('buf_key_replace', Buffer.from('val2'))
+      assert.deepEqual(mcc.get('buf_key_replace'), Buffer.from('val2'))
+    })
+    it('should store string value', () => {
+      mcc.add('str_key_replace', 'val')
+      mcc.replace('str_key_replace', 'val2')
+      assert.deepEqual(mcc.get('str_key_replace'), Buffer.from('val2'))
+    })
+    it('should store float value', () => {
+      mcc.add('num_key_replace', 1.23)
+      mcc.replace('num_key_replace', 1.24)
+      assert.equal(parseFloat(mcc.get('num_key_replace').toString()), 1.24)
+    })
+    it('should store integer value', () => {
+      mcc.add('int_key_replace', 2)
+      mcc.replace('int_key_replace', 3)
+      assert.equal(parseInt(mcc.get('int_key_replace').toString()), 3)
+    })
+  })
 })
