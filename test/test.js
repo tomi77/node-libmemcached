@@ -13,7 +13,7 @@ describe('MemcachedClient', () => {
       assert.instanceOf(mcc.get('test'), Buffer)
     })
     it('should return stored value', () => {
-      assert.equal(mcc.get('test').compare(Buffer.from('1')), 0)
+      assert.deepEqual(mcc.get('test'), Buffer.from('1'))
     })
     it('should return "undefined" when key doesn\'t exist', () => {
       assert.isUndefined(mcc.get('not_existent_key'))
@@ -165,11 +165,11 @@ describe('MemcachedClient', () => {
     })
     it('should store Buffer value', () => {
       mcc.set('buf_key', Buffer.from('val'))
-      assert.equal(mcc.get('buf_key').compare(Buffer.from('val')), 0)
+      assert.deepEqual(mcc.get('buf_key'), Buffer.from('val'))
     })
     it('should store string value', () => {
       mcc.set('str_key', 'val')
-      assert.equal(mcc.get('str_key').compare(Buffer.from('val')), 0)
+      assert.deepEqual(mcc.get('str_key'), Buffer.from('val'))
     })
     it('should store float value', () => {
       mcc.set('num_key', 1.23)
@@ -219,11 +219,11 @@ describe('MemcachedClient', () => {
     })
     it('should store Buffer value', () => {
       mcc.add('buf_key_add', Buffer.from('val'))
-      assert.equal(mcc.get('buf_key_add').compare(Buffer.from('val')), 0)
+      assert.deepEqual(mcc.get('buf_key_add'), Buffer.from('val'))
     })
     it('should store string value', () => {
       mcc.add('str_key_add', 'val')
-      assert.equal(mcc.get('str_key_add').compare(Buffer.from('val')), 0)
+      assert.deepEqual(mcc.get('str_key_add'), Buffer.from('val'))
     })
     it('should store float value', () => {
       mcc.add('num_key_add', 1.23)
@@ -236,7 +236,7 @@ describe('MemcachedClient', () => {
     it('should not replace value, when key is exists', () => {
       mcc.add('override_key_add', 'val')
       mcc.add('override_key_add', 'val2')
-      assert.equal(mcc.get('override_key_add').compare(Buffer.from('val')), 0)
+      assert.deepEqual(mcc.get('override_key_add'), Buffer.from('val'))
     })
   })
 })
