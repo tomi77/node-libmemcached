@@ -1,7 +1,7 @@
 const MemcachedClient = require('../index')
 const {assert} = require('chai')
 
-const mcc = new MemcachedClient('--SERVER=127.0.0.1')
+const mcc = new MemcachedClient('--SERVER=127.0.0.1:11212')
 
 describe('MemcachedClient', () => {
   describe('#get', () => {
