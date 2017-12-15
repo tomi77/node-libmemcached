@@ -187,53 +187,66 @@ describe('MemcachedClient', () => {
       assert.throws(fn)
     })
     it('should throws error, when value is not provided', () => {
+      if (mcc.exist('net_key')) mcc.delete('net_key')
       fn = () => mcc.add('net_key')
       assert.throws(fn)
     })
     it('should throws error, when value is boolean', () => {
+      if (mcc.exist('bool_key')) mcc.delete('bool_key')
       fn = () => mcc.add('bool_key', true)
       assert.throws(fn)
     })
     it('should throws error, when value is null', () => {
+      if (mcc.exist('null_key')) mcc.delete('null_key')
       fn = () => mcc.add('null_key', null)
       assert.throws(fn)
     })
     it('should throws error, when value is undefined', () => {
+      if (mcc.exist('undef_key')) mcc.delete('undef_key')
       fn = () => mcc.add('undef_key', undefined)
       assert.throws(fn)
     })
     it('should throws error, when value is function', () => {
+      if (mcc.exist('func_key')) mcc.delete('func_key')
       fn = () => mcc.add('func_key', () => {})
       assert.throws(fn)
     })
     it('should throws error, when value is object', () => {
+      if (mcc.exist('obj_key')) mcc.delete('obj_key')
       fn = () => mcc.add('obj_key', {'a': 1})
       assert.throws(fn)
     })
     it('should throws error, when value is Array', () => {
+      if (mcc.exist('arr_key')) mcc.delete('arr_key')
       fn = () => mcc.add('arr_key', [1, 2, 3])
       assert.throws(fn)
     })
     it('should return reference to MemcachedClient object', () => {
+      if (mcc.exist('ref_test_add')) mcc.delete('ref_test_add')
       assert.equal(mcc.add('ref_test_add', 'ref'), mcc)
     })
     it('should store Buffer value', () => {
+      if (mcc.exist('buf_key_add')) mcc.delete('buf_key_add')
       mcc.add('buf_key_add', Buffer.from('val'))
       assert.deepEqual(mcc.get('buf_key_add'), Buffer.from('val'))
     })
     it('should store string value', () => {
+      if (mcc.exist('str_key_add')) mcc.delete('str_key_add')
       mcc.add('str_key_add', 'val')
       assert.deepEqual(mcc.get('str_key_add'), Buffer.from('val'))
     })
     it('should store float value', () => {
+      if (mcc.exist('str_key_add')) mcc.delete('str_key_add')
       mcc.add('num_key_add', 1.23)
       assert.equal(parseFloat(mcc.get('num_key_add').toString()), 1.23)
     })
     it('should store integer value', () => {
+      if (mcc.exist('int_key_add')) mcc.delete('int_key_add')
       mcc.add('int_key_add', 2)
       assert.equal(parseInt(mcc.get('int_key_add').toString()), 2)
     })
     it('should not replace value, when key is exists', () => {
+      if (mcc.exist('override_key_add')) mcc.delete('override_key_add')
       mcc.add('override_key_add', 'val')
       mcc.add('override_key_add', 'val2')
       assert.deepEqual(mcc.get('override_key_add'), Buffer.from('val'))
