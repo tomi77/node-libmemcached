@@ -7,6 +7,6 @@ services:
 
 before_install:
   - docker pull memcached:alpine
-  - docker run -d memcached:alpine -p 11212:11211
+  - docker run -d memcached:alpine -p 11211:11211
   - sudo apt-get install netcat-traditional
   - printf "2\n"| sudo update-alternatives --config nc
