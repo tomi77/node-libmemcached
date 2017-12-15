@@ -10,6 +10,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 * [Installation](#installation)
 * [Usage](#usage)
 * [API](#api)
+  * [constructor(config: string)](#constructorconfig-string)
   * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [add(key: string, value: Buffer|string|number, expiration?:integer=0): this](#addkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [get(key: string): Buffer](#getkey-string-buffer)
@@ -23,7 +24,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 
 * `libmemcached`
 * `libmemcached-dev`
-* `gcc`
+* `gcc` with c++11
 
 ## Installation
 
@@ -48,6 +49,12 @@ console.log(mcc.get('test'));
 ~~~
 
 ## API
+
+### constructor(config: string)
+
+Initialize client.
+
+`config` parameter is a [libMemcached configuration](http://docs.libmemcached.org/libmemcached_configuration.html) string.
 
 ### set(key: string, value: Buffer|string|number, expiration?:integer=0): this
 
