@@ -10,3 +10,9 @@ before_install:
   - docker run -d memcached:alpine -p 11211:11211
   - sudo apt-get install netcat-traditional
   - printf "2\n"| sudo update-alternatives --config nc
+  - wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
+  - tar xvf libmemcached-1.0.18.tar.gz
+  - cd libmemcached-1.0.18
+  - ./configure
+  - make
+  - make install
