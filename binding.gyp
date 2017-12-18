@@ -17,12 +17,16 @@
         'HOME%': '<!(node -e "console.log(process.env.HOME)")',
       },
       'include_dirs': ["<!(node -e \"require('nan')\")"],
-      'link_settings': {
-        'libraries': ['-lmemcached']
-      },
       'conditions': [
         ["TRAVIS == 'true'", {
-          'include_dirs+': ["<(HOME)/include"]
+          'include_dirs+': ["<(HOME)/include"],
+          'link_settings': {
+            'libraries': ['-Wl,-rpath -Wl,<(HOME)/lib/', '-lmemcached']
+          }
+        }, {
+          'link_settings': {
+            'libraries': ['-lmemcached']
+          }
         }]
       ]
     }
