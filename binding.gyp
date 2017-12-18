@@ -12,10 +12,23 @@
         'src/storage.cc',
         'src/touch.cc'
       ],
-      'include_dirs' : ["<!(node -e \"require('nan')\")"],
-      'link_settings': {
-        'libraries': ['-lmemcached']
-      }
+      'variables': {
+        'TRAVIS%': '<!(node -e "console.log(process.env.TRAVIS)")',
+        'HOME%': '<!(node -e "console.log(process.env.HOME)")',
+      },
+      'include_dirs': ["<!(node -e \"require('nan')\")"],
+      'conditions': [
+        ["TRAVIS == 'true'", {
+          'include_dirs+': ["<(HOME)"],
+          'link_settings': {
+            'libraries': ['-L<(HOME)/lib,-Wl,-rpath,memcached']
+          }
+        }, {
+          'link_settings': {
+            'libraries': ['-lmemcached']
+          }
+        }]
+      ]
     }
   ]
 }
