@@ -5,6 +5,9 @@ node_js: node
 services:
   - docker
 
+env:
+  - LD_LIBRARY_PATH=${HOME}/lib
+
 before_install:
   - docker pull memcached:alpine
   - docker run -d memcached:alpine -p 11211:11211
