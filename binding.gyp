@@ -19,10 +19,10 @@
       'include_dirs': ["<!(node -e \"require('nan')\")"],
       'link_settings': {
         'libraries': ['-lmemcached']
-      }
+      },
       'conditions': [
         ["TRAVIS == 'true'", {
-          'include_dirs+': ["<(HOME)/include"],
+          'include_dirs+': ["<(HOME)/include"]
         }]
       ]
     }
