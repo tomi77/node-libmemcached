@@ -20,4 +20,4 @@ before_install:
   - make
   - make install
   - cd ..
-  - cp ${HOME}/lib/* .
+  - cp ${HOME}/lib/lib* .
