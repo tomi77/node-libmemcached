@@ -19,6 +19,7 @@
       'include_dirs': ["<!(node -e \"require('nan')\")"],
       'conditions': [
         ["TRAVIS == 'true'", {
+          'cflags+': ['-fPIC'],
           'include_dirs+': ["<(HOME)/include"],
           'link_settings': {
             'libraries': ['<(HOME)/lib/libmemcached.a']
