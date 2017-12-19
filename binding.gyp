@@ -21,7 +21,7 @@
         ["TRAVIS == 'true'", {
           'include_dirs+': ["<(HOME)/include"],
           'link_settings': {
-            'libraries': ['-Wl,-rpath -Wl,<(HOME)/lib/', '-lmemcached']
+            'libraries': ['<(HOME)/lib/libmemcached.a']
           }
         }, {
           'link_settings': {
