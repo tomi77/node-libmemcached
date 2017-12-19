@@ -6,7 +6,7 @@ services:
   - docker
 
 env:
-  - LD_LIBRARY_PATH=${HOME}/lib
+  - LD_LIBRARY_PATH=${HOME}/lib CXXFLAGS="-fPIC"
 
 before_install:
   - docker pull memcached:alpine
