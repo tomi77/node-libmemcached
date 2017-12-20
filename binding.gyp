@@ -18,10 +18,10 @@
       },
       'include_dirs': ["<!(node -e \"require('nan')\")"],
       'conditions': [
-        ["TRAVIS == 'true'", {
+        ["TRAVIS", {
           'include_dirs+': ["<(HOME)/include"],
           'link_settings': {
-            'libraries': ['<(HOME)/lib/libmemcached.a']
+            'libraries': ['-Wl,-rpath -Wl,<(HOME)/lib/', '-lmemcached']
           }
         }, {
           'link_settings': {
