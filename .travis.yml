@@ -2,11 +2,11 @@ language: node_js
 
 node_js: node
 
+sudo: required
+dist: trusty
+
 services:
   - docker
-
-env:
-  - LD_LIBRARY_PATH=${HOME}/lib
 
 before_install:
   - docker pull memcached:alpine
@@ -16,11 +16,7 @@ before_install:
   - wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
   - tar xvf libmemcached-1.0.18.tar.gz
   - cd libmemcached-1.0.18
-  - ./configure --prefix=$HOME
+  - ./configure --prefix=/usr
   - make
-  - make install
+  - sudo make install
   - cd ..
-
-install:
-  - npm install
-  - cp ${HOME}/lib/*.so ${HOME}/build/tomi77/node-libmemcached/build/Release/
