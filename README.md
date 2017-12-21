@@ -55,8 +55,6 @@ Initialize client.
 `config` parameter is a [libMemcached configuration](http://docs.libmemcached.org/libmemcached_configuration.html) string.
 
 ~~~js
-const MemcachedClient = require('libmemcached')
-
 const mcc = new MemcachedClient('--SERVER=127.0.0.1')
 ~~~
 
