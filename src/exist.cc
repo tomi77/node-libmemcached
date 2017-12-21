@@ -4,11 +4,6 @@
 
 namespace memcache {
 
-extern "C" memcached_return_t _memcached_exist(memcached_st *memc, char *key, size_t len)
-{
-    return memcached_exist(memc, key, len);
-}
-
 NAN_METHOD(MemcachedClient::Exist) {
     MemcachedClient *mcc = GetInstance(info);
 
@@ -19,7 +14,7 @@ NAN_METHOD(MemcachedClient::Exist) {
 
     Nan::Utf8String key(info[0]);
 
-    memcached_return_t rc = _memcached_exist(mcc->mcc, *key, key.length());
+    memcached_return_t rc = memcached_exist(mcc->mcc, *key, key.length());
     if (rc == MEMCACHED_SUCCESS)
     {
         info.GetReturnValue().Set(Nan::True());
