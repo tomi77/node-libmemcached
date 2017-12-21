@@ -38,9 +38,13 @@ describe('MemcachedClient', () => {
       fn = () => mcc.touch('not_existent_key', 1000)
       assert.throws(fn)
     })
-    it('shouldn\'t throw a exception when key exist', () => {
-      fn = () => mcc.touch('test', 10000)
-      assert.doesNotThrow(fn)
+    it('should throw a exception when expiration isn\'t integer', () => {
+      fn = () => mcc.touch('test', '1')
+      assert.throws(fn)
+      fn = () => mcc.touch('test', 'q')
+      assert.throws(fn)
+      fn = () => mcc.touch('test', 1.23)
+      assert.throws(fn)
     })
     it('should return reference to MemcachedClient object', () => {
       assert.equal(mcc.touch('test', 1000), mcc)
