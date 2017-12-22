@@ -1,6 +1,9 @@
 # libmemcached
 
 [![Build Status](https://travis-ci.org/tomi77/node-libmemcached.svg?branch=master)](https://travis-ci.org/tomi77/node-libmemcached)
+[![dependencies Status](https://david-dm.org/tomi77/node-libmemcached/status.svg)](https://david-dm.org/tomi77/node-libmemcached)
+[![devDependencies Status](https://david-dm.org/tomi77/node-libmemcached/dev-status.svg)](https://david-dm.org/tomi77/node-libmemcached?type=dev)
+![Downloads](https://img.shields.io/npm/dt/libmemcached.svg)
 
 Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
 
