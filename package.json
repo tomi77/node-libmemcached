@@ -16,7 +16,8 @@
   "keywords": [
     "libmemcached",
     "memcached",
-    "memcache"
+    "memcache",
+    "client"
   ],
   "author": "Tomasz Jakub Rup <tomasz.rup@gmail.com>",
   "license": "MIT",
