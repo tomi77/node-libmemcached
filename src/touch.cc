@@ -12,7 +12,7 @@ NAN_METHOD(MemcachedClient::Touch) {
     if (info.Length() != 2)
         return Nan::ThrowError("Must pass a key and expiration time");
     if (!info[1]->IsInt32())
-        return Nan::ThrowError("Expiration time must be a integer");
+        return Nan::ThrowTypeError("Expiration time must be a integer");
 
     Nan::Utf8String key(info[0]);
     time_t expiration = info[1]->IntegerValue();

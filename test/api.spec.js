@@ -40,11 +40,11 @@ describe('MemcachedClient', () => {
     })
     it('should throw a exception when expiration isn\'t integer', () => {
       fn = () => mcc.touch('test', '1')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.touch('test', 'q')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.touch('test', 1.23)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should return reference to MemcachedClient object', () => {
       assert.equal(mcc.touch('test', 1000), mcc)
@@ -76,11 +76,11 @@ describe('MemcachedClient', () => {
     })
     it('should throws error, when offset is not integer', () => {
       fn = () => mcc.increment('test', '1')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.increment('test', 'q')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.increment('test', 1.23)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when key is not exist', () => {
       fn = () => mcc.increment('not_existent_key')
@@ -105,11 +105,11 @@ describe('MemcachedClient', () => {
     })
     it('should throws error, when offset is not integer', () => {
       fn = () => mcc.decrement('test', '1')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.decrement('test', 'q')
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
       fn = () => mcc.decrement('test', 1.23)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when key is not exist', () => {
       fn = () => mcc.decrement('not_existent_key')
@@ -138,27 +138,27 @@ describe('MemcachedClient', () => {
     })
     it('should throws error, when value is boolean', () => {
       fn = () => mcc.set('bool_key', true)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is null', () => {
       fn = () => mcc.set('null_key', null)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is undefined', () => {
       fn = () => mcc.set('undef_key', undefined)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is function', () => {
       fn = () => mcc.set('func_key', () => {})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is object', () => {
       fn = () => mcc.set('obj_key', {'a': 1})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is Array', () => {
       fn = () => mcc.set('arr_key', [1, 2, 3])
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should return reference to MemcachedClient object', () => {
       assert.equal(mcc.set('ref_test', 'ref'), mcc)
@@ -194,32 +194,32 @@ describe('MemcachedClient', () => {
     it('should throws error, when value is boolean', () => {
       if (mcc.exist('bool_key')) mcc.delete('bool_key')
       fn = () => mcc.add('bool_key', true)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is null', () => {
       if (mcc.exist('null_key')) mcc.delete('null_key')
       fn = () => mcc.add('null_key', null)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is undefined', () => {
       if (mcc.exist('undef_key')) mcc.delete('undef_key')
       fn = () => mcc.add('undef_key', undefined)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is function', () => {
       if (mcc.exist('func_key')) mcc.delete('func_key')
       fn = () => mcc.add('func_key', () => {})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is object', () => {
       if (mcc.exist('obj_key')) mcc.delete('obj_key')
       fn = () => mcc.add('obj_key', {'a': 1})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is Array', () => {
       if (mcc.exist('arr_key')) mcc.delete('arr_key')
       fn = () => mcc.add('arr_key', [1, 2, 3])
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should return reference to MemcachedClient object', () => {
       if (mcc.exist('ref_test_add')) mcc.delete('ref_test_add')
@@ -264,27 +264,27 @@ describe('MemcachedClient', () => {
     })
     it('should throws error, when value is boolean', () => {
       fn = () => mcc.replace('bool_key', true)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is null', () => {
       fn = () => mcc.replace('null_key', null)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is undefined', () => {
       fn = () => mcc.replace('undef_key', undefined)
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is function', () => {
       fn = () => mcc.replace('func_key', () => {})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is object', () => {
       fn = () => mcc.replace('obj_key', {'a': 1})
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should throws error, when value is Array', () => {
       fn = () => mcc.replace('arr_key', [1, 2, 3])
-      assert.throws(fn)
+      assert.throws(fn, TypeError)
     })
     it('should return reference to MemcachedClient object', () => {
       assert.equal(mcc.replace('ref_test_replace', 'ref'), mcc)

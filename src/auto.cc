@@ -12,7 +12,7 @@ NAN_METHOD(MemcachedClient::Increment) {
     if (info.Length() < 1)
         return Nan::ThrowError("Must pass a key");
     if (info.Length() >= 2 && !info[1]->IsInt32())
-        return Nan::ThrowError("Offset must be a integer");
+        return Nan::ThrowTypeError("Offset must be a integer");
 
     Nan::Utf8String key(info[0]);
     uint32_t offset = 1;
@@ -38,7 +38,7 @@ NAN_METHOD(MemcachedClient::Decrement) {
     if (info.Length() < 1)
         return Nan::ThrowError("Must pass a key");
     if (info.Length() >= 2 && !info[1]->IsInt32())
-        return Nan::ThrowError("Offset must be a integer");
+        return Nan::ThrowTypeError("Offset must be a integer");
 
     Nan::Utf8String key(info[0]);
     uint32_t offset = 1;

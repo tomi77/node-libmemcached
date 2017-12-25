@@ -17,7 +17,7 @@ NAN_METHOD(MemcachedClient::Set) {
     }
     if (info.Length() >= 3 && !info[3]->IsInt32())
     {
-        return Nan::ThrowError("Expiration time must be a integer");
+        return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
     Nan::Utf8String key(info[0]);
@@ -45,7 +45,7 @@ NAN_METHOD(MemcachedClient::Set) {
     }
     else
     {
-        return Nan::ThrowError("Unsupported type");
+        return Nan::ThrowTypeError("Unsupported type");
     }
 
     time_t expiration = 0;
@@ -80,7 +80,7 @@ NAN_METHOD(MemcachedClient::Add) {
     }
     if (info.Length() >= 3 && !info[3]->IsInt32())
     {
-        return Nan::ThrowError("Expiration time must be a integer");
+        return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
     Nan::Utf8String key(info[0]);
@@ -108,7 +108,7 @@ NAN_METHOD(MemcachedClient::Add) {
     }
     else
     {
-        return Nan::ThrowError("Unsupported type");
+        return Nan::ThrowTypeError("Unsupported type");
     }
 
     time_t expiration = 0;
@@ -143,7 +143,7 @@ NAN_METHOD(MemcachedClient::Replace) {
     }
     if (info.Length() >= 3 && !info[3]->IsInt32())
     {
-        return Nan::ThrowError("Expiration time must be a integer");
+        return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
     Nan::Utf8String key(info[0]);
@@ -171,7 +171,7 @@ NAN_METHOD(MemcachedClient::Replace) {
     }
     else
     {
-        return Nan::ThrowError("Unsupported type");
+        return Nan::ThrowTypeError("Unsupported type");
     }
 
     time_t expiration = 0;

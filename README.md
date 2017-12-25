@@ -69,10 +69,13 @@ Store item.
 mcc.set('key', 'val')
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * when value is not provided
+
+Function throws `TypeError` when:
+
 * when value is boolean, null, undefined, function, object or array
 
 ~~~js
@@ -92,10 +95,13 @@ Add item. If key does exist - do nothing.
 mcc.add('key', 'val')
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * when value is not provided
+
+Function throws `TypeError` when:
+
 * when value is boolean, null, undefined, function, object or array
 
 ~~~js
@@ -115,10 +121,13 @@ Replace item. If key doesn't exist - do nothing.
 mcc.replace('key', 'val')
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * when value is not provided
+
+Function throws `TypeError` when:
+
 * when value is boolean, null, undefined, function, object or array
 
 ~~~js
@@ -138,7 +147,7 @@ Get item.
 let val = mcc.get('key')
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 
@@ -166,7 +175,7 @@ if (mcc.exist('key')) {
 }
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 
@@ -188,9 +197,12 @@ Update the expiration time of an existing item without fetching it.
 mcc.touch('key', 100)
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
+
+Function throws `TypeError` when:
+
 * expiration isn't integer
 
 ~~~js
@@ -210,7 +222,7 @@ Remove a item.
 mcc.delete('key')
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * key is not exist
@@ -232,10 +244,13 @@ Incrementing item.
 let key = mcc.increment('key', 10)
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * key is not exist
+
+Function throws `TypeError` when:
+
 * item is not integer
 * offset is not integer
 
@@ -256,10 +271,13 @@ Decrementing item.
 let key = mcc.decrement('key', 10)
 ~~~
 
-Function throws error when:
+Function throws `Error` when:
 
 * key is not provided
 * key is not exist
+
+Function throws `TypeError` when:
+
 * item is not integer
 * offset is not integer
 
