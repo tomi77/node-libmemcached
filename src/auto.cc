@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -14,20 +15,19 @@ NAN_METHOD(MemcachedClient::Increment) {
     if (info.Length() >= 2 && !info[1]->IsInt32())
         return Nan::ThrowTypeError("Offset must be a integer");
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
     uint32_t offset = 1;
     if (info.Length() >= 2)
-        offset = info[1]->IntegerValue();
+        offset = NANX_V8VALUE_TO_INTEGER(info[1]);
     uint64_t value;
 
-    memcached_return_t rc = memcached_increment(mcc->mcc, *key, key.length(), offset, &value);
+    memcached_return_t rc = memcached_increment(mcc->mcc, key.c_str(), key.length(), offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
     }
 
-    // info.GetReturnValue().Set(v8::Integer::New(v8::Isolate::GetCurrent(), value));
-    info.GetReturnValue().Set(Nan::New<v8::Number>(value));
+    info.GetReturnValue().Set(NANX_INTEGER_TO_V8NUMBER(value));
 }
 
 NAN_METHOD(MemcachedClient::Decrement) {
@@ -40,20 +40,19 @@ NAN_METHOD(MemcachedClient::Decrement) {
     if (info.Length() >= 2 && !info[1]->IsInt32())
         return Nan::ThrowTypeError("Offset must be a integer");
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
     uint32_t offset = 1;
     if (info.Length() >= 2)
-        offset = info[1]->IntegerValue();
+        offset = NANX_V8VALUE_TO_INTEGER(info[1]);
     uint64_t value;
 
-    memcached_return_t rc = memcached_decrement(mcc->mcc, *key, key.length(), offset, &value);
+    memcached_return_t rc = memcached_decrement(mcc->mcc, key.c_str(), key.length(), offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
     }
 
-    // info.GetReturnValue().Set(v8::Integer::New(v8::Isolate::GetCurrent(), value));
-    info.GetReturnValue().Set(Nan::New<v8::Number>(value));
+    info.GetReturnValue().Set(NANX_INTEGER_TO_V8NUMBER(value));
 }
 
 }  // namespace memcache

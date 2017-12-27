@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -20,28 +21,24 @@ NAN_METHOD(MemcachedClient::Set) {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
 
     std::string value;
     if (info[1]->IsArrayBufferView())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsString())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsInt32())
     {
-        value = std::to_string(info[1]->IntegerValue());
+        value = std::to_string(NANX_V8VALUE_TO_INTEGER(info[1]));
     }
     else if (info[1]->IsNumber())
     {
-        Nan::Maybe<double> nan_value = Nan::To<double>(info[1]);
-        double num_value = nan_value.FromJust();
-        value = std::to_string(num_value);
+        value = std::to_string(NANX_V8VALUE_TO_DOUBLE(info[1]));
     }
     else
     {
@@ -51,12 +48,12 @@ NAN_METHOD(MemcachedClient::Set) {
     time_t expiration = 0;
     if (info.Length() >= 3)
     {
-        expiration = info[3]->IntegerValue();
+        expiration = NANX_V8VALUE_TO_INTEGER(info[2]);
     }
 
     uint32_t flags = 0;
 
-    memcached_return_t rc = memcached_set(mcc->mcc, *key, key.length(),
+    memcached_return_t rc = memcached_set(mcc->mcc, key.c_str(), key.length(),
                                           value.c_str(), value.length(),
                                           expiration, flags);
     if (rc != MEMCACHED_SUCCESS)
@@ -83,28 +80,24 @@ NAN_METHOD(MemcachedClient::Add) {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
 
     std::string value;
     if (info[1]->IsArrayBufferView())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsString())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsInt32())
     {
-        value = std::to_string(info[1]->IntegerValue());
+        value = std::to_string(NANX_V8VALUE_TO_INTEGER(info[1]));
     }
     else if (info[1]->IsNumber())
     {
-        Nan::Maybe<double> nan_value = Nan::To<double>(info[1]);
-        double num_value = nan_value.FromJust();
-        value = std::to_string(num_value);
+        value = std::to_string(NANX_V8VALUE_TO_DOUBLE(info[1]));
     }
     else
     {
@@ -114,12 +107,12 @@ NAN_METHOD(MemcachedClient::Add) {
     time_t expiration = 0;
     if (info.Length() >= 3)
     {
-        expiration = info[3]->IntegerValue();
+        expiration = NANX_V8VALUE_TO_INTEGER(info[2]);
     }
 
     uint32_t flags = 0;
 
-    memcached_return_t rc = memcached_add(mcc->mcc, *key, key.length(),
+    memcached_return_t rc = memcached_add(mcc->mcc, key.c_str(), key.length(),
                                           value.c_str(), value.length(),
                                           expiration, flags);
     if (rc != MEMCACHED_SUCCESS && rc != MEMCACHED_NOTSTORED)
@@ -146,28 +139,24 @@ NAN_METHOD(MemcachedClient::Replace) {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
 
     std::string value;
     if (info[1]->IsArrayBufferView())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsString())
     {
-        Nan::Utf8String nan_value(info[1]);
-        value = *nan_value;
+        value = NANX_V8VALUE_TO_STRING(info[1]);
     }
     else if (info[1]->IsInt32())
     {
-        value = std::to_string(info[1]->IntegerValue());
+        value = std::to_string(NANX_V8VALUE_TO_INTEGER(info[1]));
     }
     else if (info[1]->IsNumber())
     {
-        Nan::Maybe<double> nan_value = Nan::To<double>(info[1]);
-        double num_value = nan_value.FromJust();
-        value = std::to_string(num_value);
+        value = std::to_string(NANX_V8VALUE_TO_DOUBLE(info[1]));
     }
     else
     {
@@ -177,12 +166,12 @@ NAN_METHOD(MemcachedClient::Replace) {
     time_t expiration = 0;
     if (info.Length() >= 3)
     {
-        expiration = info[3]->IntegerValue();
+        expiration = NANX_V8VALUE_TO_INTEGER(info[2]);
     }
 
     uint32_t flags = 0;
 
-    memcached_return_t rc = memcached_replace(mcc->mcc, *key, key.length(),
+    memcached_return_t rc = memcached_replace(mcc->mcc, key.c_str(), key.length(),
                                               value.c_str(), value.length(),
                                               expiration, flags);
     if (rc != MEMCACHED_SUCCESS && rc != MEMCACHED_NOTSTORED)

@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -30,9 +31,9 @@ NAN_METHOD(MemcachedClient::New) {
         return Nan::ThrowError("Must pass a config to constructor");
     }
 
-    Nan::Utf8String config(info[0]);
+    std::string config = NANX_V8VALUE_TO_STRING(info[0]);
 
-    MemcachedClient *mcc = new MemcachedClient(*config);
+    MemcachedClient *mcc = new MemcachedClient(config.c_str());
     mcc->Wrap(info.This());
     info.GetReturnValue().Set(info.This());
 }

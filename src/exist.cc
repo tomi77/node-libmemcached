@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -12,9 +13,9 @@ NAN_METHOD(MemcachedClient::Exist) {
     if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
 
-    memcached_return_t rc = memcached_exist(mcc->mcc, *key, key.length());
+    memcached_return_t rc = memcached_exist(mcc->mcc, key.c_str(), key.length());
     if (rc == MEMCACHED_SUCCESS)
     {
         info.GetReturnValue().Set(Nan::True());

@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -12,14 +13,13 @@ NAN_METHOD(MemcachedClient::Get) {
     if (info.Length() != 1)
         return Nan::ThrowError("Must pass a key");
 
-    Nan::Utf8String key(info[0]);
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
     std::vector<char> ret_val;
     uint32_t flags = 0;
     memcached_return_t rc;
     size_t value_length = 0;
-    // v8::Isolate* isolate = info.GetIsolate();
 
-    char *value = memcached_get(mcc->mcc, *key, key.length(),
+    char *value = memcached_get(mcc->mcc, key.c_str(), key.length(),
                                 &value_length, &flags, &rc);
     if (value != NULL && ret_val.empty())
     {
@@ -28,8 +28,7 @@ NAN_METHOD(MemcachedClient::Get) {
         ret_val.resize(value_length);
         free(value);
         std::string ret_str(ret_val.begin(), ret_val.end());
-        // info.GetReturnValue().Set(String::NewFromUtf8(isolate, ret_str.c_str()));
-        info.GetReturnValue().Set(Nan::CopyBuffer(ret_str.c_str(), ret_str.length()).ToLocalChecked());
+        info.GetReturnValue().Set(NANX_STRING_TO_V8BUFFER(ret_str));
     }
 }
 

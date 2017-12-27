@@ -1,6 +1,7 @@
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
+#include "marshaling.h"
 
 namespace memcache {
 
@@ -14,10 +15,10 @@ NAN_METHOD(MemcachedClient::Touch) {
     if (!info[1]->IsInt32())
         return Nan::ThrowTypeError("Expiration time must be a integer");
 
-    Nan::Utf8String key(info[0]);
-    time_t expiration = info[1]->IntegerValue();
+    std::string key = NANX_V8VALUE_TO_STRING(info[0]);
+    time_t expiration = NANX_V8VALUE_TO_INTEGER(info[1]);
 
-    memcached_return_t rc = memcached_touch(mcc->mcc, *key, key.length(), expiration);
+    memcached_return_t rc = memcached_touch(mcc->mcc, key.c_str(), key.length(), expiration);
     if (memcached_failed(rc))
     {
         return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
