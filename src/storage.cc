@@ -4,9 +4,11 @@
 #include "client.hpp"
 #include "marshaling.h"
 
-namespace memcache {
+namespace memcache
+{
 
-NAN_METHOD(MemcachedClient::Set) {
+NAN_METHOD(MemcachedClient::Set)
+{
     MemcachedClient *mcc = GetInstance(info);
 
     if (mcc->mcc == NULL)
@@ -17,7 +19,7 @@ NAN_METHOD(MemcachedClient::Set) {
     {
         return Nan::ThrowError("Must pass a key and value");
     }
-    if (info.Length() >= 3 && !info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[3]->IsInt32())
     {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }
@@ -65,7 +67,8 @@ NAN_METHOD(MemcachedClient::Set) {
     info.GetReturnValue().Set(info.This());
 }
 
-NAN_METHOD(MemcachedClient::Add) {
+NAN_METHOD(MemcachedClient::Add)
+{
     MemcachedClient *mcc = GetInstance(info);
 
     if (mcc->mcc == NULL)
@@ -76,7 +79,7 @@ NAN_METHOD(MemcachedClient::Add) {
     {
         return Nan::ThrowError("Must pass a key and value");
     }
-    if (info.Length() >= 3 && !info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[3]->IsInt32())
     {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }
@@ -124,7 +127,8 @@ NAN_METHOD(MemcachedClient::Add) {
     info.GetReturnValue().Set(info.This());
 }
 
-NAN_METHOD(MemcachedClient::Replace) {
+NAN_METHOD(MemcachedClient::Replace)
+{
     MemcachedClient *mcc = GetInstance(info);
 
     if (mcc->mcc == NULL)
@@ -135,7 +139,7 @@ NAN_METHOD(MemcachedClient::Replace) {
     {
         return Nan::ThrowError("Must pass a key and value");
     }
-    if (info.Length() >= 3 && !info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[3]->IsInt32())
     {
         return Nan::ThrowTypeError("Expiration time must be a integer");
     }

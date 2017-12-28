@@ -1,11 +1,14 @@
 // Copyright 2017 Tomasz Jakub Rup <tomasz.rup@gmail.com>
+#include "v8.h"
 #include "nan.h"
 
 #pragma once
 
-namespace memcache {
+namespace memcache
+{
 
-class MemcachedClient : public Nan::ObjectWrap {
+class MemcachedClient : public Nan::ObjectWrap
+{
 public:
     static NAN_MODULE_INIT(Initialize);
 private:

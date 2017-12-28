@@ -4,9 +4,11 @@
 #include "client.hpp"
 #include "marshaling.h"
 
-namespace memcache {
+namespace memcache
+{
 
-NAN_MODULE_INIT(MemcachedClient::Initialize) {
+NAN_MODULE_INIT(MemcachedClient::Initialize)
+{
     Nan::HandleScope scope;
 
     v8::Local<v8::FunctionTemplate> t = Nan::New<v8::FunctionTemplate>(New);
@@ -22,13 +24,16 @@ NAN_MODULE_INIT(MemcachedClient::Initialize) {
     Nan::SetPrototypeMethod(t, "increment", Increment);
     Nan::SetPrototypeMethod(t, "decrement", Decrement);
 
-    Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(), Nan::GetFunction(t).ToLocalChecked());
+    Nan::Set(target, Nan::New("MemcachedClient").ToLocalChecked(),
+             Nan::GetFunction(t).ToLocalChecked());
 }
 
-NAN_METHOD(MemcachedClient::New) {
+NAN_METHOD(MemcachedClient::New)
+{
     assert(info.IsConstructCall());
 
-    if (info.Length() != 1) {
+    if (info.Length() != 1)
+    {
         return Nan::ThrowError("Must pass a config to constructor");
     }
 
@@ -39,18 +44,21 @@ NAN_METHOD(MemcachedClient::New) {
     info.GetReturnValue().Set(info.This());
 }
 
-MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap() {
+MemcachedClient::MemcachedClient(const std::string &config) : Nan::ObjectWrap()
+{
     mcc = memcached(config.c_str(), config.size());
     memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_USE_UDP, 0);
     memcached_behavior_set(mcc, MEMCACHED_BEHAVIOR_NO_BLOCK, 0);
 }
 
 MemcachedClient *
-MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+MemcachedClient::GetInstance(const Nan::FunctionCallbackInfo<v8::Value>& info)
+{
     return Nan::ObjectWrap::Unwrap<MemcachedClient>(info.This());
 }
 
-static NAN_MODULE_INIT(Initialize) {
+static NAN_MODULE_INIT(Initialize)
+{
     Nan::HandleScope scope;
 
     MemcachedClient::Initialize(target);
@@ -58,7 +66,8 @@ static NAN_MODULE_INIT(Initialize) {
 
 }  // namespace memcache
 
-extern "C" NAN_MODULE_INIT(init) {
+extern "C" NAN_MODULE_INIT(init)
+{
   memcache::Initialize(target);
 }
 

@@ -4,17 +4,25 @@
 #include "client.hpp"
 #include "marshaling.h"
 
-namespace memcache {
+namespace memcache
+{
 
-NAN_METHOD(MemcachedClient::Touch) {
+NAN_METHOD(MemcachedClient::Touch)
+{
     MemcachedClient *mcc = GetInstance(info);
 
     if (mcc->mcc == NULL)
+    {
         return Nan::ThrowError("memcache not initialized");
+    }
     if (info.Length() != 2)
+    {
         return Nan::ThrowError("Must pass a key and expiration time");
-    if (!info[1]->IsInt32())
+    }
+    if (not info[1]->IsInt32())
+    {
         return Nan::ThrowTypeError("Expiration time must be a integer");
+    }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
     time_t expiration = NANX_V8VALUE_TO_INTEGER(info[1]);
