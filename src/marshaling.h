@@ -1,3 +1,4 @@
+// Copyright 2017 Tomasz Jakub Rup <tomasz.rup@gmail.com>
 #include <v8.h>
 #include "nan.h"
 

@@ -1,3 +1,4 @@
+// Copyright 2017 Tomasz Jakub Rup <tomasz.rup@gmail.com>
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
