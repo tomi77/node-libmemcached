@@ -13,15 +13,18 @@ NAN_METHOD(MemcachedClient::Increment)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() < 1)
     {
-        return Nan::ThrowError("Must pass a key");
+        Nan::ThrowError("Must pass a key");
+        return;
     }
     if (info.Length() >= 2 && not info[1]->IsInt32())
     {
-        return Nan::ThrowTypeError("Offset must be a integer");
+        Nan::ThrowTypeError("Offset must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -36,7 +39,8 @@ NAN_METHOD(MemcachedClient::Increment)
                                                 offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(NANX_INTEGER_TO_V8NUMBER(value));
@@ -48,15 +52,18 @@ NAN_METHOD(MemcachedClient::Decrement)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() < 1)
     {
-        return Nan::ThrowError("Must pass a key");
+        Nan::ThrowError("Must pass a key");
+        return;
     }
     if (info.Length() >= 2 && not info[1]->IsInt32())
     {
-        return Nan::ThrowTypeError("Offset must be a integer");
+        Nan::ThrowTypeError("Offset must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -71,7 +78,8 @@ NAN_METHOD(MemcachedClient::Decrement)
                                                 offset, &value);
     if (rc != MEMCACHED_SUCCESS)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(NANX_INTEGER_TO_V8NUMBER(value));

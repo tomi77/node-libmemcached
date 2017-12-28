@@ -13,15 +13,18 @@ NAN_METHOD(MemcachedClient::Touch)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() != 2)
     {
-        return Nan::ThrowError("Must pass a key and expiration time");
+        Nan::ThrowError("Must pass a key and expiration time");
+        return;
     }
     if (not info[1]->IsInt32())
     {
-        return Nan::ThrowTypeError("Expiration time must be a integer");
+        Nan::ThrowTypeError("Expiration time must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -30,7 +33,8 @@ NAN_METHOD(MemcachedClient::Touch)
     memcached_return_t rc = memcached_touch(mcc->mcc, key.c_str(), key.length(), expiration);
     if (memcached_failed(rc))
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(info.This());

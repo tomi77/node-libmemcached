@@ -13,15 +13,18 @@ NAN_METHOD(MemcachedClient::Set)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() < 2)
     {
-        return Nan::ThrowError("Must pass a key and value");
+        Nan::ThrowError("Must pass a key and value");
+        return;
     }
     if (info.Length() >= 3 && not info[3]->IsInt32())
     {
-        return Nan::ThrowTypeError("Expiration time must be a integer");
+        Nan::ThrowTypeError("Expiration time must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -45,7 +48,8 @@ NAN_METHOD(MemcachedClient::Set)
     }
     else
     {
-        return Nan::ThrowTypeError("Unsupported type");
+        Nan::ThrowTypeError("Unsupported type");
+        return;
     }
 
     time_t expiration = 0;
@@ -61,7 +65,8 @@ NAN_METHOD(MemcachedClient::Set)
                                           expiration, flags);
     if (rc != MEMCACHED_SUCCESS)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(info.This());
@@ -73,15 +78,18 @@ NAN_METHOD(MemcachedClient::Add)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() < 2)
     {
-        return Nan::ThrowError("Must pass a key and value");
+        Nan::ThrowError("Must pass a key and value");
+        return;
     }
     if (info.Length() >= 3 && not info[3]->IsInt32())
     {
-        return Nan::ThrowTypeError("Expiration time must be a integer");
+        Nan::ThrowTypeError("Expiration time must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -105,7 +113,8 @@ NAN_METHOD(MemcachedClient::Add)
     }
     else
     {
-        return Nan::ThrowTypeError("Unsupported type");
+        Nan::ThrowTypeError("Unsupported type");
+        return;
     }
 
     time_t expiration = 0;
@@ -121,7 +130,8 @@ NAN_METHOD(MemcachedClient::Add)
                                           expiration, flags);
     if (rc != MEMCACHED_SUCCESS && rc != MEMCACHED_NOTSTORED)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(info.This());
@@ -133,15 +143,18 @@ NAN_METHOD(MemcachedClient::Replace)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() < 2)
     {
-        return Nan::ThrowError("Must pass a key and value");
+        Nan::ThrowError("Must pass a key and value");
+        return;
     }
     if (info.Length() >= 3 && not info[3]->IsInt32())
     {
-        return Nan::ThrowTypeError("Expiration time must be a integer");
+        Nan::ThrowTypeError("Expiration time must be a integer");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -165,7 +178,8 @@ NAN_METHOD(MemcachedClient::Replace)
     }
     else
     {
-        return Nan::ThrowTypeError("Unsupported type");
+        Nan::ThrowTypeError("Unsupported type");
+        return;
     }
 
     time_t expiration = 0;
@@ -181,7 +195,8 @@ NAN_METHOD(MemcachedClient::Replace)
                                               expiration, flags);
     if (rc != MEMCACHED_SUCCESS && rc != MEMCACHED_NOTSTORED)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(info.This());

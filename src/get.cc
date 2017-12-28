@@ -13,11 +13,13 @@ NAN_METHOD(MemcachedClient::Get)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() != 1)
     {
-        return Nan::ThrowError("Must pass a key");
+        Nan::ThrowError("Must pass a key");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);

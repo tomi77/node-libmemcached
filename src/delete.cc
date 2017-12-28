@@ -13,11 +13,13 @@ NAN_METHOD(MemcachedClient::Delete)
 
     if (mcc->mcc == NULL)
     {
-        return Nan::ThrowError("memcache not initialized");
+        Nan::ThrowError("memcache not initialized");
+        return;
     }
     if (info.Length() != 1)
     {
-        return Nan::ThrowError("Must pass a key");
+        Nan::ThrowError("Must pass a key");
+        return;
     }
 
     std::string key = NANX_V8VALUE_TO_STRING(info[0]);
@@ -25,7 +27,8 @@ NAN_METHOD(MemcachedClient::Delete)
     memcached_return_t rc = memcached_delete(mcc->mcc, key.c_str(), key.length(), 0);
     if (rc != MEMCACHED_SUCCESS)
     {
-        return Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        Nan::ThrowError(memcached_strerror(mcc->mcc, rc));
+        return;
     }
 
     info.GetReturnValue().Set(info.This());

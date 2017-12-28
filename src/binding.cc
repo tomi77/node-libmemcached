@@ -34,7 +34,8 @@ NAN_METHOD(MemcachedClient::New)
 
     if (info.Length() != 1)
     {
-        return Nan::ThrowError("Must pass a config to constructor");
+        Nan::ThrowError("Must pass a config to constructor");
+        return;
     }
 
     std::string config = NANX_V8VALUE_TO_STRING(info[0]);
