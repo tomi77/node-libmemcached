@@ -25,6 +25,7 @@ NAN_MODULE_INIT(MemcachedClient::Initialize)
     Nan::SetPrototypeMethod(t, "set", Set);
     Nan::SetPrototypeMethod(t, "add", Add);
     Nan::SetPrototypeMethod(t, "replace", Replace);
+    Nan::SetPrototypeMethod(t, "append", Append);
     Nan::SetPrototypeMethod(t, "exist", Exist);
     Nan::SetPrototypeMethod(t, "touch", Touch);
     Nan::SetPrototypeMethod(t, "delete", Delete);

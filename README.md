@@ -17,6 +17,7 @@ Node.js bindings to the [libMemcached](http://libmemcached.org/) library.
   * [set(key: string, value: Buffer|string|number, expiration?:integer=0): this](#setkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [add(key: string, value: Buffer|string|number, expiration?:integer=0): this](#addkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [replace(key: string, value: Buffer|string|number, expiration?:integer=0): this](#replacekey-string-value-bufferstringnumber-expirationinteger0-this)
+  * [append(key: string, value: Buffer|string|number, expiration?:integer=0): this](#appendkey-string-value-bufferstringnumber-expirationinteger0-this)
   * [get(key: string): Buffer|undefined](#getkey-string-bufferundefined)
   * [exist(key: string): boolean](#existkey-string-boolean)
   * [touch(key: string, expiration: integer): this](#touchkey-string-expiration-integer-this)
@@ -133,6 +134,32 @@ Function throws `TypeError` when:
 ~~~js
 try {
   mcc.replace('key', true)
+}
+catch(err) {
+  console.error(err)
+}
+~~~
+
+### append(key: string, value: Buffer|string|number, expiration?:integer=0): this
+
+Append value to existing item. If key doesn't exist - do nothing.
+
+~~~js
+mcc.append('key', 'val')
+~~~
+
+Function throws `Error` when:
+
+* key is not provided
+* when value is not provided
+
+Function throws `TypeError` when:
+
+* when value is boolean, null, undefined, function, object or array
+
+~~~js
+try {
+  mcc.append('key', true)
 }
 catch(err) {
   console.error(err)

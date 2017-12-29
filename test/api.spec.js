@@ -313,4 +313,65 @@ describe('MemcachedClient', () => {
       assert.equal(parseInt(mcc.get('int_key_replace').toString()), 3)
     })
   })
+
+  describe('#append', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.append()
+      assert.throws(fn)
+    })
+    it('should throws error when value is not provided', () => {
+      fn = () => mcc.append('net_key')
+      assert.throws(fn)
+    })
+    it('should throws TypeError when value is boolean', () => {
+      fn = () => mcc.append('bool_key', true)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is null', () => {
+      fn = () => mcc.append('null_key', null)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is undefined', () => {
+      fn = () => mcc.append('undef_key', undefined)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is function', () => {
+      fn = () => mcc.append('func_key', () => {})
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is object', () => {
+      fn = () => mcc.append('obj_key', {'a': 1})
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is Array', () => {
+      fn = () => mcc.append('arr_key', [1, 2, 3])
+      assert.throws(fn, TypeError)
+    })
+    it('should return reference to MemcachedClient object', () => {
+      assert.equal(mcc.append('ref_test_append', 'ref'), mcc)
+    })
+    it('should doesn\'t append value, when key doesn\'t exist', () => {
+      assert.isUndefined(mcc.append('ref_new_append', 'ref').get('ref_new_append'))
+    })
+    it('should append Buffer value', () => {
+      mcc.set('buf_key_append', Buffer.from('val'))
+      mcc.append('buf_key_append', Buffer.from('val2'))
+      assert.deepEqual(mcc.get('buf_key_append'), Buffer.from('valval2'))
+    })
+    it('should append string value', () => {
+      mcc.set('str_key_append', 'val')
+      mcc.append('str_key_append', 'val2')
+      assert.deepEqual(mcc.get('str_key_append'), Buffer.from('valval2'))
+    })
+    it('should append float value', () => {
+      mcc.set('num_key_append', 1.23)
+      mcc.append('num_key_append', 1.24)
+      assert.match(mcc.get('num_key_append').toString(), /^1\.230*1\.240*/)
+    })
+    it('should append integer value', () => {
+      mcc.set('int_key_append', 2)
+      mcc.append('int_key_append', 3)
+      assert.equal(parseInt(mcc.get('int_key_append').toString()), 23)
+    })
+  })
 })
