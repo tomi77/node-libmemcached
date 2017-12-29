@@ -1,4 +1,11 @@
-// Copyright 2017 Tomasz Jakub Rup <tomasz.rup@gmail.com>
+/**
+ * node-libmemcached
+ * Copyright (C) 2017 Tomasz Jakub Rup
+ *
+ * Use and distribution licensed under the MIT license.  See
+ * the LICENSE file in the parent directory for full text.
+ */
+
 #include <libmemcached/memcached.h>
 #include "nan.h"
 #include "client.hpp"
