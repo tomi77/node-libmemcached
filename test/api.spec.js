@@ -374,4 +374,65 @@ describe('MemcachedClient', () => {
       assert.equal(parseInt(mcc.get('int_key_append').toString()), 23)
     })
   })
+
+  describe('#prepend', () => {
+    it('should throws error, when key is not provided', () => {
+      fn = () => mcc.prepend()
+      assert.throws(fn)
+    })
+    it('should throws error when value is not provided', () => {
+      fn = () => mcc.prepend('net_key')
+      assert.throws(fn)
+    })
+    it('should throws TypeError when value is boolean', () => {
+      fn = () => mcc.prepend('bool_key', true)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is null', () => {
+      fn = () => mcc.prepend('null_key', null)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is undefined', () => {
+      fn = () => mcc.prepend('undef_key', undefined)
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is function', () => {
+      fn = () => mcc.prepend('func_key', () => {})
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is object', () => {
+      fn = () => mcc.prepend('obj_key', {'a': 1})
+      assert.throws(fn, TypeError)
+    })
+    it('should throws TypeError when value is Array', () => {
+      fn = () => mcc.prepend('arr_key', [1, 2, 3])
+      assert.throws(fn, TypeError)
+    })
+    it('should return reference to MemcachedClient object', () => {
+      assert.equal(mcc.prepend('ref_test_append', 'ref'), mcc)
+    })
+    it('should doesn\'t prepend value, when key doesn\'t exist', () => {
+      assert.isUndefined(mcc.prepend('ref_new_prepend', 'ref').get('ref_new_prepend'))
+    })
+    it('should prepend Buffer value', () => {
+      mcc.set('buf_key_prepend', Buffer.from('val'))
+      mcc.prepend('buf_key_prepend', Buffer.from('val2'))
+      assert.deepEqual(mcc.get('buf_key_prepend'), Buffer.from('val2val'))
+    })
+    it('should prepend string value', () => {
+      mcc.set('str_key_prepend', 'val')
+      mcc.prepend('str_key_prepend', 'val2')
+      assert.deepEqual(mcc.get('str_key_prepend'), Buffer.from('val2val'))
+    })
+    it('should prepend float value', () => {
+      mcc.set('num_key_prepend', 1.23)
+      mcc.prepend('num_key_prepend', 1.24)
+      assert.match(mcc.get('num_key_prepend').toString(), /^1\.240*1\.230*/)
+    })
+    it('should prepend integer value', () => {
+      mcc.set('int_key_prepend', 2)
+      mcc.prepend('int_key_prepend', 3)
+      assert.equal(parseInt(mcc.get('int_key_prepend').toString()), 32)
+    })
+  })
 })

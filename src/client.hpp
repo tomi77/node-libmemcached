@@ -25,6 +25,7 @@ private:
     static NAN_METHOD(Add);
     static NAN_METHOD(Replace);
     static NAN_METHOD(Append);
+    static NAN_METHOD(Prepend);
     static NAN_METHOD(Exist);
     static NAN_METHOD(Touch);
     static NAN_METHOD(Delete);
