@@ -28,7 +28,7 @@ NAN_METHOD(MemcachedClient::Set)
         Nan::ThrowError("Must pass a key and value");
         return;
     }
-    if (info.Length() >= 3 && not info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[2]->IsInt32())
     {
         Nan::ThrowTypeError("Expiration time must be a integer");
         return;
@@ -93,7 +93,7 @@ NAN_METHOD(MemcachedClient::Add)
         Nan::ThrowError("Must pass a key and value");
         return;
     }
-    if (info.Length() >= 3 && not info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[2]->IsInt32())
     {
         Nan::ThrowTypeError("Expiration time must be a integer");
         return;
@@ -158,7 +158,7 @@ NAN_METHOD(MemcachedClient::Replace)
         Nan::ThrowError("Must pass a key and value");
         return;
     }
-    if (info.Length() >= 3 && not info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[2]->IsInt32())
     {
         Nan::ThrowTypeError("Expiration time must be a integer");
         return;
@@ -223,7 +223,7 @@ NAN_METHOD(MemcachedClient::Append)
         Nan::ThrowError("Must pass a key and value");
         return;
     }
-    if (info.Length() >= 3 && not info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[2]->IsInt32())
     {
         Nan::ThrowTypeError("Expiration time must be a integer");
         return;
@@ -288,7 +288,7 @@ NAN_METHOD(MemcachedClient::Prepend)
         Nan::ThrowError("Must pass a key and value");
         return;
     }
-    if (info.Length() >= 3 && not info[3]->IsInt32())
+    if (info.Length() >= 3 && not info[2]->IsInt32())
     {
         Nan::ThrowTypeError("Expiration time must be a integer");
         return;
