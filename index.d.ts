@@ -17,28 +17,28 @@ export default class MemcachedClient {
    * Store item.
    * @param {string}                   key        The key.
    * @param {Buffer | string | number} value      The value to store.
-   * @param {integer}                  expiration Expiration time in seconds.
+   * @param {number}                   expiration Expiration time in seconds (default 0).
    * @return {MemcachedClient}
    */
-  set(key: string, value: Buffer | string | number, expiration?: integer=0): MemcachedClient;
+  set(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
 
   /**
    * Add item. If key does exist - do nothing.
    * @param {string}                   key        The key.
    * @param {Buffer | string | number} value      The value to store.
-   * @param {integer}                  expiration Expiration time in seconds.
+   * @param {number}                   expiration Expiration time in seconds (default 0).
    * @return {MemcachedClient}
    */
-  add(key: string, value: Buffer | string | number, expiration?: integer=0): MemcachedClient;
+  add(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
 
   /**
    * Replace item. If key doesn't exist - do nothing.
    * @param {string}                   key        The key.
    * @param {Buffer | string | number} value      The value to store.
-   * @param {integer}                  expiration Expiration time in seconds.
+   * @param {number}                   expiration Expiration time in seconds (default 0).
    * @return {MemcachedClient}
    */
-  replace(key: string, value: Buffer | string | number, expiration?: integer=0): MemcachedClient;
+  replace(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
 
   /**
    * Get item.
@@ -56,28 +56,32 @@ export default class MemcachedClient {
 
   /**
    * Update the expiration time of an existing item without fetching it.
-   * @param {string}  key        The key.
-   * @param {integer} expiration Expiration time in seconds.
+   * @param {string} key        The key.
+   * @param {number} expiration Expiration time in seconds.
+   * @return {MemcachedClient}
    */
-  touch(key: string, expiration: integer): MemcachedClient;
+  touch(key: string, expiration: number): MemcachedClient;
 
   /**
    * Remove a item.
    * @param {string} key The key.
+   * @return {MemcachedClient}
    */
   delete(key: string): MemcachedClient;
 
   /**
    * Incrementing item.
-   * @param {string}  key    The key.
-   * @param {integer} offset The increment step.
+   * @param {string} key    The key.
+   * @param {number} offset The increment step (default 1).
+   * @return {number}
    */
-  increment(key: string, offset?: integer=1): integer;
+  increment(key: string, offset?: number): number;
 
   /**
    * Decrementing item.
-   * @param {string}  key    The key.
-   * @param {integer} offset The increment step.
+   * @param {string} key    The key.
+   * @param {number} offset The increment step (default 1).
+   * @return {number}
    */
-  decrement(key: string, offset?: integer=1): integer;
+  decrement(key: string, offset?: number): number;
 }
