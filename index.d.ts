@@ -23,6 +23,24 @@ export default class MemcachedClient {
   set(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
 
   /**
+   * Append value to item.
+   * @param {string}                   key        The key.
+   * @param {Buffer | string | number} value      The value to append.
+   * @param {number}                   expiration Expiration time in seconds (default 0).
+   * @return {MemcachedClient}
+   */
+  append(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
+
+  /**
+   * Prepend value to item.
+   * @param {string}                   key        The key.
+   * @param {Buffer | string | number} value      The value to prepend.
+   * @param {number}                   expiration Expiration time in seconds (default 0).
+   * @return {MemcachedClient}
+   */
+  prepend(key: string, value: Buffer | string | number, expiration?: number): MemcachedClient;
+
+  /**
    * Add item. If key does exist - do nothing.
    * @param {string}                   key        The key.
    * @param {Buffer | string | number} value      The value to store.
