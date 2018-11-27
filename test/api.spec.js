@@ -179,6 +179,10 @@ describe('MemcachedClient', () => {
       mcc.set('int_key', 2)
       assert.equal(parseInt(mcc.get('int_key').toString()), 2)
     })
+    it('should store integer value with expiration time', () => {
+      mcc.set('int_key', 2, 10)
+      assert.equal(parseInt(mcc.get('int_key').toString()), 2)
+    })
   })
 
   describe('#add', () => {
@@ -251,6 +255,11 @@ describe('MemcachedClient', () => {
       mcc.add('override_key_add', 'val2')
       assert.deepEqual(mcc.get('override_key_add'), Buffer.from('val'))
     })
+    it('should store value with expiration time', () => {
+      if (mcc.exist('int_key_add')) mcc.delete('int_key_add')
+      mcc.add('int_key_add', 2, 10)
+      assert.equal(parseInt(mcc.get('int_key_add').toString()), 2)
+    })
   })
 
   describe('#replace', () => {
@@ -310,6 +319,11 @@ describe('MemcachedClient', () => {
     it('should store integer value', () => {
       mcc.add('int_key_replace', 2)
       mcc.replace('int_key_replace', 3)
+      assert.equal(parseInt(mcc.get('int_key_replace').toString()), 3)
+    })
+    it('should store value with expiration time', () => {
+      mcc.add('int_key_replace', 2)
+      mcc.replace('int_key_replace', 3, 10)
       assert.equal(parseInt(mcc.get('int_key_replace').toString()), 3)
     })
   })
@@ -373,6 +387,11 @@ describe('MemcachedClient', () => {
       mcc.append('int_key_append', 3)
       assert.equal(parseInt(mcc.get('int_key_append').toString()), 23)
     })
+    it('should append value with expiration time', () => {
+      mcc.set('int_key_append', 2)
+      mcc.append('int_key_append', 3, 10)
+      assert.equal(parseInt(mcc.get('int_key_append').toString()), 23)
+    })
   })
 
   describe('#prepend', () => {
@@ -432,6 +451,11 @@ describe('MemcachedClient', () => {
     it('should prepend integer value', () => {
       mcc.set('int_key_prepend', 2)
       mcc.prepend('int_key_prepend', 3)
+      assert.equal(parseInt(mcc.get('int_key_prepend').toString()), 32)
+    })
+    it('should prepend value with expiration time', () => {
+      mcc.set('int_key_prepend', 2)
+      mcc.prepend('int_key_prepend', 3, 10)
       assert.equal(parseInt(mcc.get('int_key_prepend').toString()), 32)
     })
   })
